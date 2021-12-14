@@ -1,0 +1,21 @@
+[
+    {
+        "_id":0,
+        "nom":"Tournier",
+        "prenom": "Etienne",
+        "age":23,
+        "genre":"Male",
+        "panierEnCours":"",
+        "panier":"",
+        "photoProfil":"/home/eisti/cy-tech-2021-etienne12345687/server/data/images/profil.webp"
+    },{
+        "_id":1,
+        "nom":"Mahfoudi",
+        "prenom": "Younès",
+        "age":23,
+        "genre":"Male",
+        "panierEnCours":"",
+        "panier":"",
+        "photoProfil":"/home/eisti/cy-tech-2021-etienne12345687/server/data/images/profil.webp"
+    }
+]
