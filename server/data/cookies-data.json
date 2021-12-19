@@ -1,54 +1,45 @@
 [
     {
-        "_id?":0,
         "nom":"Cookie au chocolat",
         "prix":1,
         "recette": "Farine, beurre, Oeuf, sucre, levure chimique, sel, pepites de chocolat, Chocolat Noir 70%",
         "photo":"/home/eisti/cy-tech-2021-etienne12345687/server/data/images/cookiesChoco.webp"
     },{
-        "_id?":1,
         "nom":"Cookie au double chocolat",
         "prix":1.5,
         "recette": "Farine, beurre, Oeuf, sucre, levure chimique, sel, pepites de chocolat noir et blanc",
         "photo":"/home/eisti/cy-tech-2021-etienne12345687/server/data/images/cookiesDoubleChoco.png"
     },{
-        "_id?":2,
         "nom":"Cookie aux pépites de chocolats",
         "prix":1,
         "recette": "Farine, beurre, Oeuf, sucre, levure chimique, sel, pepites de chocolat",
         "photo":"/home/eisti/cy-tech-2021-etienne12345687/server/data/images/cookiesBasic.jpeg"
     },{
-        "_id?":3,
         "nom":"Cookie suprême cacahuète",
         "prix":2,
         "recette": "Farine, beurre de cacahuetes, Oeuf, sucre, levure chimique, sel, éclats de cacahuètes, caramel",
         "photo":"/home/eisti/cy-tech-2021-etienne12345687/server/data/images/cookiesCacahuetes.jpg"
     },{
-        "_id?":4,
         "nom":"Cookie à la fraise",
         "prix":1,
         "recette": "Farine, beurre, Oeuf, sucre, levure chimique, sel, morceaux de fraise",
         "photo":"/home/eisti/cy-tech-2021-etienne12345687/server/data/images/cookiesFraise.jpg"
     },{
-        "_id?":5,
         "nom":"Cookie au smarthies",
         "prix":2,
         "recette": "Farine, beurre, Oeuf, sucre, levure chimique, sel, smarthies",
         "photo":"/home/eisti/cy-tech-2021-etienne12345687/server/data/images/cookiesSmarthies.jpg"
     },{
-        "_id?":6,
         "nom":"Cookie au thé vert et chocolat blanc",
         "prix":1.5,
         "recette": "Farine, beurre, Oeuf, sucre, levure chimique, sel, pepites de chocolat blancs, thé vert",
         "photo":"/home/eisti/cy-tech-2021-etienne12345687/server/data/images/cookieThe.jpg"
     },{
-        "_id?":7,
         "nom":"Cookie de Noël nature",
         "prix":2,
         "recette": "Farine, beurre, Oeuf, sucre, levure chimique, sel, cannelle",
         "photo":"/home/eisti/cy-tech-2021-etienne12345687/server/data/images/cookiesNoel.jpg"
     },{
-        "_id?":8,
         "nom":"Cookie de Noël nappé",
         "prix":2,
         "recette": "Farine, beurre, Oeuf, sucre, levure chimique, sel, cannelle, napage chocolat blanc",
