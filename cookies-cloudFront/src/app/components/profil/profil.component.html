@@ -1,1 +1,17 @@
-<p>profil works!</p>
+<app-menu></app-menu>
+<div class='profil' *ngIf="currentUser; else loggedOut">
+  <div class='header'>
+    <img class='image' src='../../../assets/images/profil.png'>
+  </div>
+  <div class='body' *ngFor="let role of currentUser.roles">
+    <h1> {{ currentUser.username }} </h1>
+    Vous êtes connecté en tant que {{ role }}
+  </div>
+</div>
+  
+  <ng-template #loggedOut>
+    Please login.
+  </ng-template>
+
+
+  

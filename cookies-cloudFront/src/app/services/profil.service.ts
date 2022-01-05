@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IProfil } from '../utils/modele/profil';
 
-const baseUrl = 'http://localhost:8080/api/profil';
+const API_URL = 'http://localhost:8080/api/';
 
 @Injectable({
   providedIn: 'root'
@@ -12,24 +11,16 @@ export class ProfilService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<any> {
-    return this.http.get(baseUrl);
+  getPublicContent(): Observable<any> {
+    return this.http.get(API_URL + 'allUser', { responseType: 'text' });
   }
 
-  get(id: any): Observable<any> {
-    return this.http.get(`${baseUrl}/${id}`);
+  getUserBoard(): Observable<any> {
+    return this.http.get(API_URL + 'user', { responseType: 'text' });
   }
 
-  create(data: IProfil): Observable<any> {
-    return this.http.post(baseUrl, data);
-  }
-
-  update(id: any, data: IProfil): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, data);
-  }
-
-  delete(id: any): Observable<any> {
-    return this.http.delete(`${baseUrl}/${id}`);
+  getAdminBoard(): Observable<any> {
+    return this.http.get(API_URL + 'admin', { responseType: 'text' });
   }
 
 }

@@ -1,0 +1,11 @@
+.profil {
+    display: flex;
+}
+
+.image {
+    max-width: 200px;
+}
+
+.body {
+    margin: 10px
+}

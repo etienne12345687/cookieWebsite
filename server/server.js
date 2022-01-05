@@ -1,41 +1,79 @@
-// Import express
-let express = require('express');
-// Import Body parser
-let bodyParser = require('body-parser');
-// Import Mongoose
-let mongoose = require('mongoose');
-// Initialise the app
-let app = express();
-var cors = require('cors');
+const express = require("express");
+const cors = require("cors");
+const dbConfig = require("./config/db.config");
 
-// Import routes
-let apiRoutes = require("./route/api-routes");
-// Configure bodyparser to handle post requests
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-app.use(bodyParser.json());
-app.use(cors());
+const app = express();
+
+var corsOptions = {
+  origin: "http://localhost:4200"
+};
+
+app.use(cors(corsOptions));
+
+// parse requests of content-type - application/json
+app.use(express.json());
+
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+const db = require("./models");
+const Role = db.role;
+
+db.mongoose
+  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/?readPreference=primary&appname=MongoDB%20Compass&ssl=false`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => {
+    console.log("Successfully connect to MongoDB.");
+    initial();
+  })
+  .catch(err => {
+    console.error("Connection error", err);
+    process.exit();
+  });
 
 
-// Connect to Mongoose and set connection variable
-mongoose.connect('mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false', { useNewUrlParser: true, useUnifiedTopology: true });
-var db = mongoose.connection;
-
-// Added check for DB connection
-if(!db)
-    console.log("Error connecting db")
-else
-    console.log("Db connected successfully")
-
-// Setup server port
-var port = process.env.PORT || 8080;
-
-// Use Api routes in the App
-app.use('/api', apiRoutes);
-
-
-// Launch app to listen to specified port
-app.listen(port, function () {
-    console.log("Running Project on port " + port);
+// simple route
+app.get("/", (req, res) => {
+  res.json({ message: "Bienvenue sur le server Cookie" });
 });
+
+// routes
+require("./routes/auth.routes")(app);
+require("./routes/user.routes")(app);
+require("./routes/cookie.routes")(app);
+
+// set port, listen for requests
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
+
+function initial() {
+  Role.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      new Role({
+        name: "user"
+      }).save(err => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'user' to roles collection");
+      });
+
+      new Role({
+        name: "admin"
+      }).save(err => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'admin' to roles collection");
+      });
+    }
+  });
+}
+
+

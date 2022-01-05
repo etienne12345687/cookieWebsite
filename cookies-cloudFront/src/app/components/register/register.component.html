@@ -1,0 +1,50 @@
+<app-menu></app-menu>
+
+<div style="width: 400px; margin: auto;">
+  <form
+      *ngIf="!isSuccessful"
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+    <div class="submit-form">
+        <div class="form-group">
+
+        <div class="form-group">
+            <label for="username">username</label>
+            <input
+              class="form-control"
+              id="username"
+              required
+              [(ngModel)]="form.username"
+              name="username"
+            />
+          </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="form.password"
+            required
+            minlength="6"
+            #password="ngModel"
+          />
+          </div>
+  
+          <div class="form-group">
+            <button class="btn btn-primary btn-block" (click) = 'onSubmit()'>Submit</button>
+          </div>
+    
+          <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+            Inscription raté <br />{{ errorMessage }}
+          </div>
+  
+      <div *ngIf="isSuccessful">
+        <h4>Vous êtes désormais inscrits !</h4>
+        <button class="btn btn-success" routerLink="/connexion">S'identifier</button>
+      </div>
+    </div>

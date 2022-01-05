@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'src/app/services/cookie.service';
 
 @Component({
   selector: 'app-cookie-admin',
@@ -7,9 +8,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CookieAdminComponent implements OnInit {
 
-  constructor() { }
+  cookie = {
+    nom: '',
+    prix: 0,
+    recette: '',
+    photo: '',
+  };
+  submitted = false;
+
+  constructor(private cookieService: CookieService) { }
 
   ngOnInit(): void {
   }
 
+  saveCookie(): void {
+    const data = {
+      nom: '',
+      prix: 0,
+      recette: '',
+      photo: '',
+    };
+
+    this.cookieService.create(data)
+      .subscribe(
+        (        response: any) => {
+          console.log(response);
+          this.submitted = true;
+        },
+        (        error: any) => {
+          console.log(error);
+        });
+  }
+
+  newCookie(): void {
+    this.submitted = false;
+    this.cookie = {
+      nom: '',
+      prix: 0,
+      recette: '',
+      photo: '',
+    };
+  }
 }

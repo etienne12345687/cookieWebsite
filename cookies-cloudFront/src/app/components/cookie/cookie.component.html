@@ -1,1 +1,30 @@
-<p>cookie works!</p>
+<app-menu></app-menu>
+<section class="alignment">
+  <div class="max-card">
+    <article class="card-size" *ngFor="let e of listeCookie">
+        <div class="card-shape">
+        <mat-card class="example-card">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>{{e.nom}}</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src={{e.photo}} alt="">
+            <mat-card-content>
+              <p>
+                {{e.prix}}
+              </p>
+              <p>
+                  Recette : {{e.recette}}
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button>Acheter</button>
+            </mat-card-actions>
+        </mat-card>
+        </div>
+    </article>
+  </div>
+</section>
+
+
+  

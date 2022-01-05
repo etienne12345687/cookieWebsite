@@ -1,7 +1,7 @@
 export interface ICookies {
     _id?:number | string;
     nom:string;
-    prix:Float32Array;
+    prix:Number;
     recette: string;
     photo:string;
 }

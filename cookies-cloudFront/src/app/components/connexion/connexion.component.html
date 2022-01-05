@@ -1,1 +1,54 @@
-<p>connexion works!</p>
+<app-menu></app-menu>
+<section>
+    <div class="center">
+        <form
+        *ngIf="!isLoggedIn"
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      > 
+        <div class="form-floating mb-3">
+            <input
+            type="text"
+            class="form-control"
+            name="username"
+            [(ngModel)]="form.username"
+            required
+            #username="ngModel"
+          />
+        <label for="floatingPassword">Identifiant</label>
+
+        <div class="form-floating">
+            <input
+            type="password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="form.password"
+            required
+            minlength="6"
+            #password="ngModel"
+          />
+        <label for="floatingPassword">Password</label>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary btn-block" (click)= 'onSubmit()'>
+              Login
+            </button>
+            <a class="navLink" routerLink="/register">Register</a>
+          </div>
+          <div class="form-group">
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="f.submitted && isLoginFailed"
+            >
+              Login failed: {{ errorMessage }}
+            </div>
+          </div>
+    
+        <div class="alert alert-success" *ngIf="isLoggedIn">
+          Logged in as {{ roles }}.
+        </div>
+      </div>

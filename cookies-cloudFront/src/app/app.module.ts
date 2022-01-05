@@ -6,12 +6,17 @@ import { AppComponent } from './app.component';
 import { CookieComponent } from './components/cookie/cookie.component';
 import { CookieDetailsComponent } from './components/cookie-details/cookie-details.component';
 import { PanierComponent } from './components/panier/panier.component';
-import { ProfilComponent } from './components/profil/profil.component';
 import { ConnexionComponent } from './components/connexion/connexion.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuComponent } from './structure/menu/menu.component';
 import { FooterComponent } from './structure/footer/footer.component';
 import { Erreur404Component } from './structure/erreur404/erreur404.component';
+import {MatTabsModule} from '@angular/material/tabs'; 
+import { MatCardModule } from '@angular/material/card';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { RegisterComponent } from './components/register/register.component';
+import { ProfilComponent } from './components/profil/profil.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +28,17 @@ import { Erreur404Component } from './structure/erreur404/erreur404.component';
     ConnexionComponent,
     MenuComponent,
     FooterComponent,
-    Erreur404Component
+    Erreur404Component,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    MatTabsModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
