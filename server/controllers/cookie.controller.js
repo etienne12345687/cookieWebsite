@@ -22,7 +22,7 @@ exports.index = function (req, res) {
 
 // Handle create cookie actions
 exports.new = function (req, res) {
-    var cookie = new Cookie();
+    const cookie = new Cookie();
     cookie.nom = req.body.nom ? req.body.nom : cookie.nom;
     cookie.recette = req.body.recette;
     cookie.prix = req.body.prix;

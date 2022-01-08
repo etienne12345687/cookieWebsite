@@ -12,7 +12,7 @@ module.exports = function(app) {
     });
 
     app.get("/api/cookie", cookieController.index);
-    app.post("/api/cookie/:cookie_id", cookieController.new);
+    app.post("/api/cookie", cookieController.new);
     app.get("/api/cookie", cookieController.view);
     app.patch("/api/cookie", cookieController.update);
     app.put("/api/cookie", cookieController.update);

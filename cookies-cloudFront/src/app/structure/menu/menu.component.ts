@@ -15,7 +15,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-    if (this.tokenStorageService.getUser().roles === 'ROLE_ADMIN'){
+    if (this.tokenStorageService.getUser().roles == 'ROLE_ADMIN'){
       this.isAdmin = true;
     };
   }

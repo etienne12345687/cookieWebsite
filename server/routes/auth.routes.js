@@ -13,11 +13,14 @@ module.exports = function(app) {
   app.post(
     "/api/auth/signup",
     [
-      verifySignUp.checkDuplicateUsernameOrEmail,
+      verifySignUp.checkDuplicateUsername,
       verifySignUp.checkRolesExisted
     ],
     controller.signup
   );
 
   app.post("/api/auth/signin", controller.signin);
+
+  app.get("/api/auth/user", controller.index);
+  app.delete("/api/auth/user/:user_id", controller.delete);
 };

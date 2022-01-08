@@ -1,5 +1,9 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
 .profil {
     display: flex;
+    justify-content: center;
+    padding-top: 30px;
 }
 
 .image {
@@ -8,4 +12,14 @@
 
 .body {
     margin: 10px
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.btn {
+    margin-top: 5px;
 }

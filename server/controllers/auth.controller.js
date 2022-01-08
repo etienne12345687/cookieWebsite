@@ -9,7 +9,7 @@ var bcrypt = require("bcryptjs");
 exports.signup = (req, res) => {
   const user = new User({
     username: req.body.username,
-    password: bcrypt.hashSync(req.body.password, 8)
+    password: bcrypt.hashSync(req.body.password, 8),
   });
 
   user.save((err, user) => {
@@ -104,4 +104,34 @@ exports.signin = (req, res) => {
         accessToken: token
       });
     });
+};
+
+exports.index = function (req, res) {
+  User.get(function (err, user) {
+      if (err) {
+          res.json({
+              status: "Error",
+              message: err,
+          });
+      }
+      res.json({
+          status: "success",
+          message: "user retrieved successfully",
+          data: user
+      });
+  });
+};
+
+exports.delete = function (req, res) {
+  User.remove({
+      _id: req.params.user_id
+  }, function (err, user) {
+      if (err){
+        res.send(err);
+      }
+      res.json({
+        status: "success",
+        message: 'user deleted'
+      });
+  });
 };

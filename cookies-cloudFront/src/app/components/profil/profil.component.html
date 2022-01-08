@@ -6,6 +6,17 @@
   <div class='body' *ngFor="let role of currentUser.roles">
     <h1> {{ currentUser.username }} </h1>
     Vous êtes connecté en tant que {{ role }}
+    <div *ngIf="isAdmin">
+      En tant qu'admin, vous ne pouvez ni supprimer, ni modifier les paramètres du compte.
+    </div>
+    <div class="button-group" *ngIf="!isAdmin">
+      <button class="btn btn-warning" >
+        Changer le nom d'utilisateur
+      </button>
+      <button class="btn btn-danger" (click)="deleteAccount()">
+        Supprimer mon compte 
+      </button>
+    </div>
   </div>
 </div>
   

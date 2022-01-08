@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ICookies } from 'src/app/utils/modele/cookies';
-import { environment } from 'src/environments/environment';
 import { CookieService } from 'src/app/services/cookie.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { PanierService } from 'src/app/services/panier.service';
 
 
 @Component({
@@ -13,11 +14,21 @@ import { CookieService } from 'src/app/services/cookie.service';
 export class CookieComponent implements OnInit {
 
   listeCookie:Array<ICookies> = [];
+  isLoggedIn = false;
+  form: any = {
+    quantity: null,
+  }
+  isSuccessful = false;
+  isFailed = false;
 
-  constructor(private http:HttpClient, public CookieServ: CookieService) { 
+  constructor(
+    private tokenStorageService: TokenStorageService,
+    public CookieServ: CookieService,
+    public panierServ: PanierService) { 
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
     this.getCookie();
   }
 
@@ -28,6 +39,26 @@ export class CookieComponent implements OnInit {
     error => {
       console.log(error);
     });
+  }
+
+  addToPanier(element: any){
+    const cookie = {
+      cookie: element._id,
+      quantity: this.form.quantity,
+      user: this.tokenStorageService.getUser().id,
+      prix: element.prix * this.form.quantity
+    }
+
+    this.panierServ.create(cookie).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.isSuccessful = true;
+        this.isFailed = false;
+      },
+      (error:any) => {
+        console.log(error);
+      }
+    );
   }
 
 }

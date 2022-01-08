@@ -11,15 +11,32 @@
             <img mat-card-image src={{e.photo}} alt="">
             <mat-card-content>
               <p>
-                {{e.prix}}
+                {{e.prix}} euros
               </p>
               <p>
                   Recette : {{e.recette}}
               </p>
             </mat-card-content>
+            <form 
+              *ngIf="isLoggedIn" 
+              name="form"
+              #f="ngForm"
+              novalidate
+            >
+            <div class="form-group">
+              <label for="quantity">Qty.</label>
+              <input
+                type="quantity"
+                class="form-control"
+                name="quantity"
+                [(ngModel)]="form.quantity"
+                required
+              />
+              </div>
             <mat-card-actions>
-              <button mat-button>Acheter</button>
+              <button mat-button (click)="addToPanier(e)">Acheter</button>
             </mat-card-actions>
+            </form>
         </mat-card>
         </div>
     </article>

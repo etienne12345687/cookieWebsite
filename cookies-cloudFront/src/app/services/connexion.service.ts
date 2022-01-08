@@ -27,4 +27,8 @@ export class ConnexionService {
       password
     }, httpOptions);
   }
+
+  delete(id: string): Observable<any> {
+    return this.http.delete(AUTH_API + 'user/' + id, httpOptions);
+  }
 }

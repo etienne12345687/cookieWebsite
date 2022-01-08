@@ -23,10 +23,10 @@ export class CookieAdminComponent implements OnInit {
 
   saveCookie(): void {
     const data = {
-      nom: '',
-      prix: 0,
-      recette: '',
-      photo: '',
+      nom: this.cookie.nom,
+      prix: this.cookie.prix,
+      recette: this.cookie.recette,
+      photo: this.cookie.photo,
     };
 
     this.cookieService.create(data)

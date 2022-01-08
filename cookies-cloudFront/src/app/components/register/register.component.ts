@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
-        
+        window.location.replace('http://localhost:4200/connexion');
       },
       error: err => {
         this.errorMessage = err.error.message;

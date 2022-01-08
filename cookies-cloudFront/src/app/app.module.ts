@@ -9,7 +9,6 @@ import { PanierComponent } from './components/panier/panier.component';
 import { ConnexionComponent } from './components/connexion/connexion.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuComponent } from './structure/menu/menu.component';
-import { FooterComponent } from './structure/footer/footer.component';
 import { Erreur404Component } from './structure/erreur404/erreur404.component';
 import {MatTabsModule} from '@angular/material/tabs'; 
 import { MatCardModule } from '@angular/material/card';
@@ -27,7 +26,6 @@ import { ProfilComponent } from './components/profil/profil.component';
     ProfilComponent,
     ConnexionComponent,
     MenuComponent,
-    FooterComponent,
     Erreur404Component,
     RegisterComponent
   ],
