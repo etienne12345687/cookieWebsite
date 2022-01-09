@@ -21,18 +21,18 @@
               *ngIf="isLoggedIn" 
               name="form"
               #f="ngForm"
-              novalidate
             >
             <div class="form-group">
-              <label for="quantity">Qty.</label>
+              <label for="quantity">Qté.</label>
               <input
-                type="quantity"
+                type="number"
                 class="form-control"
                 name="quantity"
                 [(ngModel)]="form.quantity"
                 required
               />
               </div>
+              <span class="validity">{{ validity }} </span>
             <mat-card-actions>
               <button mat-button (click)="addToPanier(e)">Acheter</button>
             </mat-card-actions>

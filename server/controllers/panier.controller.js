@@ -41,12 +41,11 @@ exports.update = function (req, res) {Panier.findById(req.params.panier_id, func
     if (err){
         res.send(err);
     }
-    
     panier.cookie = req.body.cookie;
     panier.quantity = req.body.quantity;
     panier.user = req.body.user;
     panier.prix = req.body.prix;
-    panier.active = true;
+    panier.active = req.body.active;
     
     panier.save(function (err) {
         if (err){

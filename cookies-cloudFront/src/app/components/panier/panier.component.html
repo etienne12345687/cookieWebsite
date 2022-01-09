@@ -1,7 +1,48 @@
 <app-menu></app-menu>
-<div class='currentPanier'>
+<div class="container">
+  <h2> Mon panier </h2>
+  <div class='currentPanier' *ngIf="!currentPanierEmpty">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Cookie</th>
+          <th scope="col">Quantité</th>
+          <th scope="col">Prix unitaire</th>
+          <th scope="col">Prix Totale</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+       <tr *ngFor="let command of currentPanier; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td> {{ command.cookieName }} </td>
+          <td>{{ command.quantity | number }}</td>
+          <td> {{ command.prixUnitaire }} </td>
+          <td>{{ command.prix | number }}</td>
+          <td>
+            <button class="btn btn-danger" style="max-width: 100px;" (click)="delete(command._id)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="validation">
+      <button class="btn btn-success button" (click)="ValidatePanier()">
+        Valider
+      </button>
+    </div>
+  </div>
+
+  <div class='currentPanier' *ngIf="currentPanierEmpty">
+    Vous n'avez pas encore d'article dans votre panier.
+  </div>
+
+
+  <div class='previousPanier'>
+      <h2> Panier précédent </h2>
+      <div class='previousPanier' *ngIf="!previousPanierEmpty">
         <table class="table table-striped">
-            <thead>
+          <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Cookie</th>
@@ -9,23 +50,22 @@
               <th scope="col">Prix unitaire</th>
               <th scope="col">Prix Totale</th>
             </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let command of currentPanier; index as i">
+          </thead>
+          <tbody>
+            <tr *ngFor="let command of previousPanier; index as i">
               <th scope="row">{{ i + 1 }}</th>
-              <td>
-                {{ command.cookie }}
-              </td>
+              <td> {{ command.cookieName }} </td>
               <td>{{ command.quantity | number }}</td>
-              <td> 1 </td>
+              <td> {{ command.prixUnitaire }} </td>
               <td>{{ command.prix | number }}</td>
             </tr>
-            </tbody>
-          </table>
-</div>
+          </tbody>
+        </table>
+      </div>
 
-<div class='PreviousPanier'>
-    <div *ngFor="let e of previousPanier">
-
+    <div class='previousPanier' *ngIf="previousPanierEmpty">
+      Vous n'avez pas encore d'article dans votre panier.
     </div>
+  
+  </div>
 </div>

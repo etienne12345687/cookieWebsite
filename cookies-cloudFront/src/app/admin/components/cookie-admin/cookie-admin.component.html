@@ -1,4 +1,33 @@
-<div style="width: 400px; margin: auto;">
+<div class="colonne">
+  <div class="listeCookie">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">nom</th>
+        <th scope="col">recette</th>
+        <th scope="col">Prix</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let cookie of listeCookie; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          {{ cookie.nom }}
+        </td>
+        <td>{{ cookie.recette }}</td>
+        <td> {{ cookie.prix }} </td>
+        <td><button class="btn btn-warning"> Modifier </button></td>
+        <td><button class="btn btn-danger" (click)="delete(cookie._id)"> Supprimer </button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="width: 400px; margin: auto;">
+    <h2> Ajouter un cookie </h2>
     <div class="submit-form">
       <div *ngIf="!submitted">
         <div class="form-group">
@@ -17,15 +46,18 @@
           <label for="prix">prix</label>
           <input
             class="form-control"
+            type="number"
+            step="0.01"
             id="prix"
             required
             [(ngModel)]="cookie.prix"
             name="prix"
           />
+          <span class="validity">{{ priceValidation }} </span>
         </div>
 
         <div class="form-group">
-            <label for="recette">recette</label>
+          <label for="recette">recette</label>
             <input
               class="form-control"
               id="recette"
@@ -33,10 +65,10 @@
               [(ngModel)]="cookie.recette"
               name="recette"
             />
-          </div>
+        </div>
 
         <div class="form-group">
-            <label for="photo">photo</label>
+          <label for="photo">photo</label>
             <input
               class="form-control"
               id="photo"
@@ -44,9 +76,13 @@
               [(ngModel)]="cookie.photo"
               name="photo"
             />
-          </div>
-  
-        <button (click)="saveCookie()" class="btn btn-success">Submit</button>
+        </div>
+        
+        <div class="validation">
+          <button class="btn btn-success button" (click)="saveCookie()">
+            Valider
+          </button>
+        </div>
       </div>
   
       <div *ngIf="submitted">
@@ -55,3 +91,4 @@
       </div>
     </div>
   </div>
+</div>

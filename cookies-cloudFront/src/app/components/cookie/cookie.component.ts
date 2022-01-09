@@ -20,6 +20,7 @@ export class CookieComponent implements OnInit {
   }
   isSuccessful = false;
   isFailed = false;
+  validity= '';
 
   constructor(
     private tokenStorageService: TokenStorageService,
@@ -48,17 +49,24 @@ export class CookieComponent implements OnInit {
       user: this.tokenStorageService.getUser().id,
       prix: element.prix * this.form.quantity
     }
+    
+    if (this.form.quantity === null){
+      this.validity = "Merci d'entrer un nombre.";
+    } else {
+      this.validity = "";
+      this.panierServ.create(cookie).subscribe(
+        (res: any) => {
+          console.log(res);
+          this.isSuccessful = true;
+          this.isFailed = false;
+          return ;
+        },
+        (error:any) => {
+          console.log(error);
+        }
+      );
+    }
 
-    this.panierServ.create(cookie).subscribe(
-      (res: any) => {
-        console.log(res);
-        this.isSuccessful = true;
-        this.isFailed = false;
-      },
-      (error:any) => {
-        console.log(error);
-      }
-    );
   }
 
 }

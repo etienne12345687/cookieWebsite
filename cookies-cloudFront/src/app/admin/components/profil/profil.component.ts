@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConnexionService } from 'src/app/services/connexion.service';
 
 @Component({
   selector: 'app-profil',
@@ -7,9 +8,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilComponent implements OnInit {
 
-  constructor() { }
+  profils: Array<any> = [];
+
+  constructor(private connexionServ: ConnexionService) { }
 
   ngOnInit(): void {
+    this.initListeProfils();
   }
 
+  initListeProfils() {
+    this.connexionServ.getAll().subscribe(data => {
+      data.data.forEach((element: { username: string; }) => {
+        if (element.username != "root") {
+          this.profils.push(element);
+        }
+      });
+    },
+    error => {
+      console.log(error);
+    });
+  }
+
+  delete(id: any){
+    this.connexionServ.delete(id).subscribe(
+      (res: any) => {
+        window.location.reload();
+      },
+      (error:any) => {
+        console.log(error);
+      }
+    );
+  };
 }

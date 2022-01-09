@@ -13,6 +13,8 @@ export class PanierComponent implements OnInit {
   currentPanier: Array<any> = [];
   previousPanier: Array<any> = [];
   panier: Array<any> = [];
+  currentPanierEmpty= true;
+  previousPanierEmpty= true;
 
   constructor(
     private tokenStorageService: TokenStorageService,
@@ -26,25 +28,99 @@ export class PanierComponent implements OnInit {
 
   initPanier(){
     this.panierServ.getAll().subscribe(data => {
-      data.data.forEach( (e: { user: any; active: boolean; }) => {
+      data.data.forEach( (e: { user: { toString: () => any; }; active: boolean; _id: any; cookie: any; prix: any; quantity: any; }) => {
+        console.log(e);
         if (e.user.toString() === this.tokenStorageService.getUser().id){
           if (e.active === true){
-            this.currentPanier.push(e);
+            this.currentPanier.push({
+              _id: e._id,
+              user: e.user,
+              cookie: e.cookie,
+              cookieName: '',
+              prix: e.prix,
+              quantity: e.quantity,
+              prixUnitaire: 0
+            });
+            this.currentPanierEmpty = false;
           } else {
-            this.previousPanier.push(e);
+            this.previousPanier.push({
+              _id: e._id,
+              user: e.user,
+              cookie: e.cookie,
+              cookieName: '',
+              prix: e.prix,
+              quantity: e.quantity,
+              prixUnitaire: 0
+            });
+            this.previousPanierEmpty = false;
           }
         };
       },
         (error: any) => {
         console.log(error);
       });
+
+      this.getCookieInfo();
+      console.log(this.previousPanier);
     });
   }
 
   getCookieInfo(){
     this.currentPanier.forEach( e => {
-      
+      this.CookieServ.get(e.cookie).subscribe(
+        data => {
+          e.cookieName = data.data.nom;
+          e.prixUnitaire = data.data.prix;
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    })
+
+    this.previousPanier.forEach( e => {
+      this.CookieServ.get(e.cookie).subscribe(
+        data => {
+          e.cookieName = data.data.nom;
+          e.prixUnitaire = data.data.prix;
+        },
+        error => {
+          console.log(error);
+        }
+      );
     })
   }
 
+  ValidatePanier() {
+    this.currentPanier.forEach( e => {
+      console.log(e);
+      this.panierServ.update(e._id, {
+        _id: e._id,
+        user: e.user,
+        cookie: e.cookie,
+        prix: e.prix,
+        quantity: e.quantity,
+        dateTime: new Date(),
+        active: false
+      }).subscribe(
+        response => {
+          console.log(response);
+          window.location.reload();
+        },
+        error => {
+          console.log(error);
+        });
+    })
+  }
+
+  delete(id: any){
+    this.panierServ.delete(id).subscribe(
+      (res: any) => {
+        window.location.reload();
+      },
+      (error:any) => {
+        console.log(error);
+      }
+    );
+  }
 }

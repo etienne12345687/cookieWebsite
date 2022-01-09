@@ -1,6 +1,6 @@
 <app-menu></app-menu>
 <section>
-    <div class="center">
+    <div style="width: 400px; margin: auto;">
         <form
         *ngIf="!isLoggedIn"
         name="form"
@@ -8,7 +8,8 @@
         #f="ngForm"
         novalidate
       > 
-        <div class="form-floating mb-3">
+        <div class="form-group">
+          <label for="username">Username</label>
             <input
             type="text"
             class="form-control"
@@ -17,9 +18,9 @@
             required
             #username="ngModel"
           />
-        <label for="floatingPassword">Identifiant</label>
 
-        <div class="form-floating">
+        <div class="form-group">
+          <label for="username">Password</label>
             <input
             type="password"
             class="form-control"
@@ -29,14 +30,14 @@
             minlength="6"
             #password="ngModel"
           />
-        <label for="floatingPassword">Password</label>
         </div>
-
-        <div class="form-group">
-            <button class="btn btn-primary btn-block" (click)= 'onSubmit()'>
-              Login
+          <div class="validation">
+            <button class="btn btn-success" (click)="onSubmit()">
+              Valider
             </button>
-            <a class="navLink" routerLink="/register">Register</a>
+          </div>
+          <div class="inscrit">
+            Tu n'as pas encore de compte ? <a class="navLink" routerLink="/register">Inscris-toi</a>
           </div>
           <div class="form-group">
             <div

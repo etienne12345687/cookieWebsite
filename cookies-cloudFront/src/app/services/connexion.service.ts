@@ -31,4 +31,8 @@ export class ConnexionService {
   delete(id: string): Observable<any> {
     return this.http.delete(AUTH_API + 'user/' + id, httpOptions);
   }
+
+  getAll(): Observable<any> {
+    return this.http.get(AUTH_API+ 'user', httpOptions);
+  }
 }

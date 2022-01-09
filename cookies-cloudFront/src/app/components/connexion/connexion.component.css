@@ -1,6 +1,18 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
-.center {
+.btn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.validation {
+    padding: 20px;
+    position: relative;
+}
+
+.inscrit {
     display: flex;
     justify-content: center;
+    padding-top: 20px;
 }

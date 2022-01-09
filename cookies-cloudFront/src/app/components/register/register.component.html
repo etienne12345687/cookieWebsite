@@ -1,6 +1,7 @@
 <app-menu></app-menu>
 
 <div style="width: 400px; margin: auto;">
+  <h2 style="display: flex; justify-content: center;">INSCRIPTION</h2>
   <form
       *ngIf="!isSuccessful"
       name="form"
@@ -12,13 +13,14 @@
         <div class="form-group">
 
         <div class="form-group">
-            <label for="username">username</label>
+            <label for="username">Username</label>
             <input
               class="form-control"
               id="username"
               required
               [(ngModel)]="form.username"
               name="username"
+              required
             />
           </div>
 
@@ -32,11 +34,14 @@
             required
             minlength="6"
             #password="ngModel"
+            required
           />
           </div>
   
-          <div class="form-group">
-            <button class="btn btn-primary btn-block" (click) = 'onSubmit()'>Submit</button>
+          <div class="validation">
+            <button class="btn btn-success" (click)="onSubmit()">
+              Valider
+            </button>
           </div>
     
           <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">

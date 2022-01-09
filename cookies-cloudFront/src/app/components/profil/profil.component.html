@@ -10,9 +10,6 @@
       En tant qu'admin, vous ne pouvez ni supprimer, ni modifier les paramètres du compte.
     </div>
     <div class="button-group" *ngIf="!isAdmin">
-      <button class="btn btn-warning" >
-        Changer le nom d'utilisateur
-      </button>
       <button class="btn btn-danger" (click)="deleteAccount()">
         Supprimer mon compte 
       </button>

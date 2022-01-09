@@ -1,1 +1,26 @@
-<p>profil works good!</p>
+<div class='profils'>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">username</th>
+          <th scope="col">password</th>
+          <th scope="col">Supprimer</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let p of profils; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>
+            {{ p.username }}
+          </td>
+          <td>{{ p.password }}</td>
+          <td>
+            <button class="btn btn-danger" (click)="delete(p._id)">
+                Supprimer
+              </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+</div>
