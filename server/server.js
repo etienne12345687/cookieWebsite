@@ -4,9 +4,10 @@ const dbConfig = require("./config/db.config");
 
 const app = express();
 
-var corsOptions = {
+const corsOptions = {
   origin: "http://localhost:4200"
 };
+
 
 app.use(cors(corsOptions));
 
@@ -34,7 +35,6 @@ db.mongoose
   });
 
 
-// simple route
 app.get("/", (req, res) => {
   res.json({ message: "Bienvenue sur le server Cookie" });
 });
@@ -44,6 +44,7 @@ require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/cookie.routes")(app);
 require("./routes/panier.routes")(app);
+require("./routes/images.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

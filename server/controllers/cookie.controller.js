@@ -1,7 +1,7 @@
 // cookieController.js
 
 // Import contact model
-Cookie = require('../models/cookie.model');
+const Cookie = require('../models/cookie.model');
 
 // Handle index actions
 exports.index = function (req, res) {

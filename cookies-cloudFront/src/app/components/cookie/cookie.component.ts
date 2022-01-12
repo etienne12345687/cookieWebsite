@@ -4,6 +4,8 @@ import { ICookies } from 'src/app/utils/modele/cookies';
 import { CookieService } from 'src/app/services/cookie.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { PanierService } from 'src/app/services/panier.service';
+import { ImageService } from 'src/app/services/image.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 
 @Component({
@@ -13,7 +15,7 @@ import { PanierService } from 'src/app/services/panier.service';
 })
 export class CookieComponent implements OnInit {
 
-  listeCookie:Array<ICookies> = [];
+  listeCookie: Array<any> = [];
   isLoggedIn = false;
   form: any = {
     quantity: null,
@@ -25,7 +27,9 @@ export class CookieComponent implements OnInit {
   constructor(
     private tokenStorageService: TokenStorageService,
     public CookieServ: CookieService,
-    public panierServ: PanierService) { 
+    public panierServ: PanierService,
+    private imageServ: ImageService,
+    private sanitizer:DomSanitizer) { 
   }
 
   ngOnInit(): void {
@@ -33,9 +37,36 @@ export class CookieComponent implements OnInit {
     this.getCookie();
   }
 
+  sanitize( url:string ) {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }  
+
+  arrayBufferToBase64( buffer: Iterable<number> ) {
+    var binary = '';
+    var bytes = new Uint8Array( buffer );
+    var len = bytes.byteLength;
+    for (var i = 0; i < len; i++) {
+       binary += String.fromCharCode( bytes[ i ] );
+    }
+    return window.btoa( binary );
+  }
+
   getCookie(){
     this.CookieServ.getAll().subscribe(data => {
-      this.listeCookie = data.data;
+      data.data.forEach((element: {_id:any, nom: any; prix: any; recette: any; photo: any; }) => {
+        this.imageServ.get(element.photo).subscribe( data => {
+          console.log(data);
+          this.listeCookie.push({
+            _id: element._id,
+            nom: element.nom,
+            prix: element.prix,
+            recette: element.recette,
+            photo: this.arrayBufferToBase64(data),
+            quantity: 0,
+            afficherRecette: false
+          });
+        })
+      })
     },
     error => {
       console.log(error);
@@ -66,7 +97,10 @@ export class CookieComponent implements OnInit {
         }
       );
     }
+  }
 
+  afficherRecette(element: { afficherRecette: any; }, boolean: any){
+    element.afficherRecette = boolean;
   }
 
 }

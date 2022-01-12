@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
-const AUTH_API = 'http://localhost:8080/api/auth/';
+const baseUrl = 'http://localhost:8080/api/auth/';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -15,24 +15,24 @@ export class ConnexionService {
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post(AUTH_API + 'signin', {
+    return this.http.post(baseUrl + 'signin', {
       username,
       password
     }, httpOptions);
   }
 
   register(username: string, password: string): Observable<any> {
-    return this.http.post(AUTH_API + 'signup', {
+    return this.http.post(baseUrl + 'signup', {
       username,
       password
     }, httpOptions);
   }
 
   delete(id: string): Observable<any> {
-    return this.http.delete(AUTH_API + 'user/' + id, httpOptions);
+    return this.http.delete(baseUrl + 'user/' + id, httpOptions);
   }
 
   getAll(): Observable<any> {
-    return this.http.get(AUTH_API+ 'user', httpOptions);
+    return this.http.get(baseUrl+ 'user', httpOptions);
   }
 }

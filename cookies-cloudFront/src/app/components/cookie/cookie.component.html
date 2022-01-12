@@ -8,14 +8,20 @@
               <div mat-card-avatar class="example-header-image"></div>
               <mat-card-title>{{e.nom}}</mat-card-title>
             </mat-card-header>
-            <img mat-card-image src={{e.photo}} alt="">
+            <img mat-card-image [src]="sanitize('data:image/jpg;base64, ' + e.photo)" alt="">
             <mat-card-content>
               <p>
                 {{e.prix}} euros
               </p>
-              <p>
-                  Recette : {{e.recette}}
-              </p>
+              <div *ngIf="e.afficherRecette">
+                <p>
+                    Recette : {{e.recette}}
+                </p>
+                <button (click)="afficherRecette(e, false)">Masquer recette</button>
+              </div>
+              <p *ngIf="!(e.afficherRecette)">
+                <button (click)="afficherRecette(e, true)">Afficher recette</button>
+            </p>
             </mat-card-content>
             <form 
               *ngIf="isLoggedIn" 

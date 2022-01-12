@@ -28,6 +28,11 @@
 
   <div style="width: 400px; margin: auto;">
     <h2> Ajouter un cookie </h2>
+    <form
+          name="form"
+          #f="ngForm"
+          enctype="multipart/form-data"
+        >
     <div class="submit-form">
       <div *ngIf="!submitted">
         <div class="form-group">
@@ -43,7 +48,7 @@
         </div>
   
         <div class="form-group">
-          <label for="prix">prix</label>
+          <label for="prix">Prix</label>
           <input
             class="form-control"
             type="number"
@@ -57,7 +62,7 @@
         </div>
 
         <div class="form-group">
-          <label for="recette">recette</label>
+          <label for="recette">Recette</label>
             <input
               class="form-control"
               id="recette"
@@ -68,14 +73,31 @@
         </div>
 
         <div class="form-group">
-          <label for="photo">photo</label>
+          <label for="photo">Photo</label>
             <input
+              type="file"
+              name="file"
+              id="input-files"
               class="form-control"
-              id="photo"
-              required
               [(ngModel)]="cookie.photo"
-              name="photo"
+              (change)="selectFile($event)"
             />
+            <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
+              Upload
+            </button>
+            <div *ngIf="currentFile" class="progress my-3">
+              <div
+                class="progress-bar progress-bar-info progress-bar-striped"
+                role="progressbar"
+                attr.aria-valuenow="{{ progress }}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                [ngStyle]="{ width: progress + '%' }"
+              >
+                {{ progress }}%
+              </div>
+            </div>
+            <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
         </div>
         
         <div class="validation">
@@ -84,11 +106,8 @@
           </button>
         </div>
       </div>
-  
-      <div *ngIf="submitted">
-        <h4>You submitted successfully!</h4>
-        <button class="btn btn-success" (click)="newCookie()">Add</button>
       </div>
-    </div>
+      </form>
   </div>
 </div>
+
