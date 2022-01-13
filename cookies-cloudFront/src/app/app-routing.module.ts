@@ -7,11 +7,22 @@ import { ProfilComponent } from './components/profil/profil.component';
 import { RegisterComponent } from './components/register/register.component';
 import { Erreur404Component } from './structure/erreur404/erreur404.component';
 import { AdminGuard } from './utils/security/admin.guard';
+import { PanierGuard } from './utils/security/panier.guard';
+import { ProfilGuard } from './utils/security/profil.guard';
 
 const routes: Routes = [
   {path:'', component:CookieComponent},
-  {path:'profil',component:ProfilComponent},
-  {path:'panier',component:PanierComponent},
+  {
+    path:'profil',
+    component:ProfilComponent,
+    canActivate:[ProfilGuard],
+  },
+  {
+    path:'panier',
+    component:PanierComponent,
+    canActivate:[PanierGuard],
+    canLoad:[PanierGuard]
+  },
   {path:'connexion',component:ConnexionComponent},
   {path:'register', component: RegisterComponent},
   {

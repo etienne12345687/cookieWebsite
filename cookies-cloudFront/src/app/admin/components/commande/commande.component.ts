@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConnexionService } from 'src/app/services/connexion.service';
 import { CookieService } from 'src/app/services/cookie.service';
 import { PanierService } from 'src/app/services/panier.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-commande',
@@ -95,6 +96,7 @@ export class CommandeComponent implements OnInit {
     this.commandGroupByUser.forEach(e => {
       this.connexionServ.getUser(e.user).subscribe(
         data => {
+          console.log(data.data);
           e.userName =  data.data.username;
         },
         error => {
@@ -117,25 +119,43 @@ export class CommandeComponent implements OnInit {
   }
 
   SendCommand(id: any) {
-    this.currentCommand.forEach( e => {
-      if (e.user.toString() === id.toString()) {
-        this.panierServ.update(e._id, {
-          _id: e._id,
-          user: e.user,
-          cookie: e.cookie,
-          prix: e.prix,
-          quantity: e.quantity,
-          dateTime: new Date(),
-          payed: true,
-          sent: true
-        }).subscribe(
-          response => {
-            console.log(response);
-            window.location.reload();
-          },
-          error => {
-            console.log(error);
-          });
+    Swal.fire({
+      title: 'confirmez-vous l\'envoie de la commande ?',
+      text: 'Il ne sera pas possible de revenir en arrière',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui',
+      cancelButtonText: 'Non',
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+
+        this.currentCommand.forEach( e => {
+          if (e.user.toString() === id.toString()) {
+            this.panierServ.update(e._id, {
+              _id: e._id,
+              user: e.user,
+              cookie: e.cookie,
+              prix: e.prix,
+              quantity: e.quantity,
+              dateTime: new Date(),
+              payed: true,
+              sent: true
+            }).subscribe(
+              response => {
+                console.log(response);
+                window.location.reload();
+              },
+              error => {
+                console.log(error);
+              });
+          }
+        })
+
+      } else if (result.isDismissed) {
+
+        console.log('Envoie non confirmé');
+
       }
     })
   }

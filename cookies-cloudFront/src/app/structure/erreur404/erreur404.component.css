@@ -1,0 +1,6 @@
+.center {
+    display: flex;
+    justify-content: center;
+    max-height: 500px;
+    max-width: 5000px;
+}

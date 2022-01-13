@@ -1,11 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { ICookies } from 'src/app/utils/modele/cookies';
+import { Component, OnInit, Input } from '@angular/core';
 import { CookieService } from 'src/app/services/cookie.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { PanierService } from 'src/app/services/panier.service';
 import { ImageService } from 'src/app/services/image.service';
 import {DomSanitizer} from '@angular/platform-browser';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -66,10 +65,6 @@ export class CookieComponent implements OnInit {
             photo: this.arrayBufferToBase64(data),
             quantity: 0,
             afficherRecette: false,
-            achat: {
-              showMessage: false,
-              message: 'Ajouté au panier'
-            }
           });
         })
       })
@@ -96,17 +91,13 @@ export class CookieComponent implements OnInit {
           console.log(res);
           this.isSuccessful = true;
           this.isFailed = false;
-          return ;
+          Swal.fire('', 'Cookie ajouté au panier', 'success')
         },
         (error:any) => {
           console.log(error);
         }
       );
     }
-    element.achat.showMessage = true;
-    setTimeout(function(){
-      element.achat.showMessage = false;
-    }, 2000);
   }
 
   afficherRecette(element: { afficherRecette: any; }, boolean: any){
@@ -114,3 +105,4 @@ export class CookieComponent implements OnInit {
   }
 
 }
+

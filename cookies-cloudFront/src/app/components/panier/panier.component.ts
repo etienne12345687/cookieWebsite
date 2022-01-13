@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'src/app/services/cookie.service';
 import { PanierService } from 'src/app/services/panier.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-panier',
@@ -103,7 +104,14 @@ export class PanierComponent implements OnInit {
       }).subscribe(
         response => {
           console.log(response);
-          window.location.reload();
+          Swal.fire({
+            title: 'Cookie commandé',
+            text: 'Les cookies vous seront livrées dans les plus brefs délais',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          }).then((result) => {
+            window.location.reload();
+          })
         },
         error => {
           console.log(error);
@@ -112,13 +120,29 @@ export class PanierComponent implements OnInit {
   }
 
   delete(id: any){
-    this.panierServ.delete(id).subscribe(
-      (res: any) => {
-        window.location.reload();
-      },
-      (error:any) => {
-        console.log(error);
+    Swal.fire({
+      title: 'Êtes-vous sur ?',
+      text: 'Le cookie seront définitivement supprimé',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui',
+      cancelButtonText: 'Non',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.panierServ.delete(id).subscribe(
+          (res: any) => {
+            window.location.reload();
+          },
+          (error:any) => {
+            console.log(error);
+          }
+        );
+      } else if (result.isDismissed) {
+
+        console.log('Clicked No, File is safe!');
+
       }
-    );
+    })
+    
   }
 }
