@@ -18,6 +18,7 @@ export class ProfilComponent implements OnInit {
 
   initListeProfils() {
     this.connexionServ.getAll().subscribe(data => {
+      console.log(data);
       data.data.forEach((element: { username: string; }) => {
         if (element.username != "root") {
           this.profils.push(element);

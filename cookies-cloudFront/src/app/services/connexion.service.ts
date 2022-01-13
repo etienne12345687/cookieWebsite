@@ -33,7 +33,7 @@ export class ConnexionService {
   }
 
   getAll(): Observable<any> {
-    return this.http.get(baseUrl+ 'user', httpOptions);
+    return this.http.get(baseUrl, httpOptions);
   }
 
   getUser(id: any): Observable<any> {

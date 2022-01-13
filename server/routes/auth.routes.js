@@ -21,6 +21,6 @@ module.exports = function(app) {
 
   app.post("/api/auth/signin", controller.signin);
   app.get("/api/auth/:user_id", controller.view);
-  app.get("/api/auth/user", controller.index);
+  app.get("/api/auth/", controller.index);
   app.delete("/api/auth/user/:user_id", controller.delete);
 };
