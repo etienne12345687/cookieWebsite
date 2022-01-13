@@ -24,7 +24,8 @@ exports.new = (req, res) => {
     panier.quantity = req.body.quantity;
     panier.user = req.body.user;
     panier.prix = req.body.prix;
-    panier.active = true;
+    panier.payed = false;
+    panier.sent = false;
 
     panier.save(function (err) {
         if (err) {
@@ -45,7 +46,8 @@ exports.update = function (req, res) {Panier.findById(req.params.panier_id, func
     panier.quantity = req.body.quantity;
     panier.user = req.body.user;
     panier.prix = req.body.prix;
-    panier.active = req.body.active;
+    panier.payed = req.body.payed;
+    panier.sent= req.body.sent;
     
     panier.save(function (err) {
         if (err){

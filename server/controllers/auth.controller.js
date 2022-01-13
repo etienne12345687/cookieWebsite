@@ -135,3 +135,14 @@ exports.delete = function (req, res) {
       });
   });
 };
+
+exports.view = function (req, res) {
+  User.findById(req.params.user_id, function (err, user) {
+      if (err)
+          res.send(err);
+      res.json({
+          message: 'user details loading..',
+          data: user
+      });
+  });
+};

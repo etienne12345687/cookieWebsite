@@ -1,0 +1,33 @@
+<div class="container" *ngFor="let user of commandGroupByUser">
+    <h2> Commande de {{ user.userName }} </h2>
+    <div class='currentCommande' *ngIf="!currentCommandEmpty">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Cookie</th>
+            <th scope="col">Quantité</th>
+            <th scope="col">Prix unitaire</th>
+            <th scope="col">Prix Totale</th>
+          </tr>
+        </thead>
+        <tbody>
+         <tr *ngFor="let command of user.data; index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td> {{ command.cookieName }} </td>
+            <td>{{ command.quantity | number }}</td>
+            <td> {{ command.prixUnitaire }} </td>
+            <td>{{ command.prix | number }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="validation">
+      <button class="btn btn-success button" (click)="SendCommand(user.user)">
+        Commande Expédiée
+      </button>
+    </div>
+    <div class='currentCommande' *ngIf="currentCommandEmpty">
+      Pas de commande en cours
+    </div>
+</div>

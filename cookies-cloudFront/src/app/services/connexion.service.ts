@@ -35,4 +35,8 @@ export class ConnexionService {
   getAll(): Observable<any> {
     return this.http.get(baseUrl+ 'user', httpOptions);
   }
+
+  getUser(id: any): Observable<any> {
+    return this.http.get(baseUrl+ id, httpOptions);
+  }
 }

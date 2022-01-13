@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CookieComponent } from './components/cookie/cookie.component';
-import { CookieDetailsComponent } from './components/cookie-details/cookie-details.component';
 import { PanierComponent } from './components/panier/panier.component';
 import { ConnexionComponent } from './components/connexion/connexion.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,7 +20,6 @@ import { ProfilComponent } from './components/profil/profil.component';
   declarations: [
     AppComponent,
     CookieComponent,
-    CookieDetailsComponent,
     PanierComponent,
     ProfilComponent,
     ConnexionComponent,

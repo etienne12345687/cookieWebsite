@@ -19,7 +19,7 @@
         </td>
         <td>{{ cookie.recette }}</td>
         <td> {{ cookie.prix }} </td>
-        <td><button class="btn btn-warning"> Modifier </button></td>
+        <td><button class="btn btn-warning" [routerLink]="['/admin/cookie-detail',cookie._id]"> Modifier </button></td>
         <td><button class="btn btn-danger" (click)="delete(cookie._id)"> Supprimer </button></td>
       </tr>
       </tbody>

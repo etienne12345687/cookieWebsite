@@ -19,7 +19,11 @@ const panierSchema = mongoose.Schema({
       type: Number,
       required: true
     },
-    active: {
+    payed: {
+      type: Boolean,
+      required: true
+    },
+    sent: {
       type: Boolean,
       required: true
     },

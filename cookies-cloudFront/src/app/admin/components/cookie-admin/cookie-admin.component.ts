@@ -128,16 +128,4 @@ export class CookieAdminComponent implements OnInit {
       }
     );
   }
-
-  update(){
-    /*
-    this.panierServ.update(e._id, data).subscribe(
-      response => {
-        console.log(response);
-      },
-      error => {
-        console.log(error);
-      });
-      */
-  }
 }

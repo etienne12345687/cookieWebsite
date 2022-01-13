@@ -17,9 +17,8 @@ export class CookieComponent implements OnInit {
 
   listeCookie: Array<any> = [];
   isLoggedIn = false;
-  form: any = {
-    quantity: null,
-  }
+  isAdmin = false;
+  achat = '';
   isSuccessful = false;
   isFailed = false;
   validity= '';
@@ -34,6 +33,9 @@ export class CookieComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.tokenStorageService.getUser().roles == 'ROLE_ADMIN'){
+      this.isAdmin = true;
+    };
     this.getCookie();
   }
 
@@ -63,7 +65,11 @@ export class CookieComponent implements OnInit {
             recette: element.recette,
             photo: this.arrayBufferToBase64(data),
             quantity: 0,
-            afficherRecette: false
+            afficherRecette: false,
+            achat: {
+              showMessage: false,
+              message: 'Ajouté au panier'
+            }
           });
         })
       })
@@ -76,12 +82,12 @@ export class CookieComponent implements OnInit {
   addToPanier(element: any){
     const cookie = {
       cookie: element._id,
-      quantity: this.form.quantity,
+      quantity: element.quantity,
       user: this.tokenStorageService.getUser().id,
-      prix: element.prix * this.form.quantity
+      prix: element.prix * element.quantity
     }
     
-    if (this.form.quantity === null){
+    if (element.quantity === 0){
       this.validity = "Merci d'entrer un nombre.";
     } else {
       this.validity = "";
@@ -97,6 +103,10 @@ export class CookieComponent implements OnInit {
         }
       );
     }
+    element.achat.showMessage = true;
+    setTimeout(function(){
+      element.achat.showMessage = false;
+    }, 2000);
   }
 
   afficherRecette(element: { afficherRecette: any; }, boolean: any){

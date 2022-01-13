@@ -7,6 +7,8 @@ import { ProfilComponent } from './components/profil/profil.component';
 import { FormsModule } from '@angular/forms';
 import { AccueilAdminComponent } from './components/accueil-admin/accueil-admin.component';
 import { MenuAdminComponent } from './components/menu-admin/menu-admin.component';
+import { CookieDetailComponent } from './components/cookie-detail/cookie-detail.component';
+import { CommandeComponent } from './components/commande/commande.component';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { MenuAdminComponent } from './components/menu-admin/menu-admin.component
     CookieAdminComponent,
     ProfilComponent,
     AccueilAdminComponent,
-    MenuAdminComponent
+    MenuAdminComponent,
+    CookieDetailComponent,
+    CommandeComponent
   ],
   imports: [
     CommonModule,

@@ -28,9 +28,9 @@ export class PanierComponent implements OnInit {
 
   initPanier(){
     this.panierServ.getAll().subscribe(data => {
-      data.data.forEach( (e: { user: { toString: () => any; }; active: boolean; _id: any; cookie: any; prix: any; quantity: any; }) => {
+      data.data.forEach( (e: { user: { toString: () => any; }; payed: boolean; _id: any; cookie: any; prix: any; quantity: any; }) => {
         if (e.user.toString() === this.tokenStorageService.getUser().id){
-          if (e.active === true){
+          if (e.payed === false){
             this.currentPanier.push({
               _id: e._id,
               user: e.user,
@@ -98,7 +98,8 @@ export class PanierComponent implements OnInit {
         prix: e.prix,
         quantity: e.quantity,
         dateTime: new Date(),
-        active: false
+        payed: true,
+        sent: false
       }).subscribe(
         response => {
           console.log(response);

@@ -15,6 +15,6 @@ module.exports = function(app) {
     app.post("/api/cookie", cookieController.new);
     app.get("/api/cookie/:cookie_id", cookieController.view);
     app.patch("/api/cookie", cookieController.update);
-    app.put("/api/cookie", cookieController.update);
+    app.put("/api/cookie/:cookie_id", cookieController.update);
     app.delete("/api/cookie/:cookie_id", cookieController.delete);
   };
