@@ -11,6 +11,9 @@ const User = mongoose.model(
         type: String,
         required: true
     },
+    address: {
+      type: String
+    },
     roles: [
       {
         type: mongoose.Schema.Types.ObjectId,

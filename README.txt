@@ -1,5 +1,8 @@
 Projet réalisé par Etienne TOURNIER-RIGAUDY
 
+Initialisation du projet: 
+    -> run npm install
+
 Pour lancer le projet : 
     -> dans le fichier server/ :
         commande pour lancer mongo db : mongod --dbpath data/db/

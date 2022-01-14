@@ -38,9 +38,9 @@
   </div>
 
 
-  <div class='previousPanier'>
+  <div class='previousPanier' *ngIf="!previousPanierEmpty">
       <h2> Panier précédent </h2>
-      <div class='previousPanier' *ngIf="!previousPanierEmpty">
+      <div class='previousPanier'>
         <table class="table table-striped">
           <thead>
             <tr>
@@ -62,10 +62,5 @@
           </tbody>
         </table>
       </div>
-
-    <div class='previousPanier' *ngIf="previousPanierEmpty">
-      Vous n'avez pas encore d'article dans votre panier.
-    </div>
-  
   </div>
 </div>

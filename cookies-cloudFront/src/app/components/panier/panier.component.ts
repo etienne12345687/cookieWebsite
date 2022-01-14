@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConnexionService } from 'src/app/services/connexion.service';
 import { CookieService } from 'src/app/services/cookie.service';
 import { PanierService } from 'src/app/services/panier.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
@@ -20,8 +21,9 @@ export class PanierComponent implements OnInit {
   constructor(
     private tokenStorageService: TokenStorageService,
     public CookieServ: CookieService,
-    public panierServ: PanierService) { 
-  }
+    public panierServ: PanierService,
+    public connexionServ: ConnexionService
+  ) {}
 
   ngOnInit(): void {
     this.initPanier();
@@ -59,7 +61,6 @@ export class PanierComponent implements OnInit {
         (error: any) => {
         console.log(error);
       });
-
       this.getCookieInfo();
     });
   }
@@ -91,32 +92,113 @@ export class PanierComponent implements OnInit {
   }
 
   ValidatePanier() {
-    this.currentPanier.forEach( e => {
-      this.panierServ.update(e._id, {
-        _id: e._id,
-        user: e.user,
-        cookie: e.cookie,
-        prix: e.prix,
-        quantity: e.quantity,
-        dateTime: new Date(),
-        payed: true,
-        sent: false
-      }).subscribe(
-        response => {
-          console.log(response);
+    this.connexionServ.getUser(this.tokenStorageService.getUser().id).subscribe(
+      data => {
+        if (data.data.address === undefined) {
           Swal.fire({
-            title: 'Cookie commandé',
-            text: 'Les cookies vous seront livrées dans les plus brefs délais',
-            icon: 'success',
-            confirmButtonText: 'OK',
+            title: 'Veuillez indiquer l\'adresse de livraison',
+            input: 'text',
+            inputAttributes: {
+              autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Confirmer',
+            showLoaderOnConfirm: true,
+            preConfirm: (address) => {
+              return this.connexionServ.addAdress(this.tokenStorageService.getUser().id, {"address": address}).subscribe(
+                data => {
+                  console.log(data);
+                },
+                error => {
+                  console.log(error);
+                  return error;
+                }
+              )
+            },
+            allowOutsideClick: () => !Swal.isLoading()
           }).then((result) => {
-            window.location.reload();
+            if (result.isConfirmed) {
+              this.currentPanier.forEach( e => {
+                this.panierServ.update(e._id, {
+                  _id: e._id,
+                  user: e.user,
+                  cookie: e.cookie,
+                  prix: e.prix,
+                  quantity: e.quantity,
+                  dateTime: new Date(),
+                  payed: true,
+                  sent: false
+                }).subscribe(
+                  response => {
+                    Swal.fire({
+                      title: 'Cookie commandé',
+                      text: 'Les cookies vous seront livrées dans les plus brefs délais',
+                      icon: 'success',
+                      confirmButtonText: 'OK',
+                    }).then(() => {
+                      window.location.reload();
+                    })
+                  },
+                  error => {
+                    console.log(error);
+                  });
+              })
+            }
           })
-        },
-        error => {
-          console.log(error);
-        });
-    })
+        } else {
+          Swal.fire({
+            title: 'Conserver l\'adresse de livraison enregistrée ?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Oui, je conserve',
+            cancelButtonText: 'Non, je change',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.currentPanier.forEach( e => {
+                this.panierServ.update(e._id, {
+                  _id: e._id,
+                  user: e.user,
+                  cookie: e.cookie,
+                  prix: e.prix,
+                  quantity: e.quantity,
+                  dateTime: new Date(),
+                  payed: true,
+                  sent: false
+                }).subscribe(
+                  response => {
+                    Swal.fire({
+                      title: 'Cookie commandé',
+                      text: 'Les cookies vous seront livrées dans les plus brefs délais',
+                      icon: 'success',
+                      confirmButtonText: 'OK',
+                    }).then(() => {
+                      window.location.reload();
+                    })
+                  },
+                  error => {
+                    console.log(error);
+                  });
+              })
+            } else {
+              this.connexionServ.addAdress(this.tokenStorageService.getUser().id, {"address": undefined}).subscribe(
+                data => {
+                  console.log(data);
+                  this.ValidatePanier();
+                },
+                error => {
+                  console.log(error);
+                  return error;
+                }
+              )
+            }
+          },
+          error => {
+            console.log(error);
+            return error;
+          })
+        }
+      }
+    )
   }
 
   delete(id: any){

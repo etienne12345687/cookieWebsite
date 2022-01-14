@@ -39,4 +39,8 @@ export class ConnexionService {
   getUser(id: any): Observable<any> {
     return this.http.get(baseUrl+ id, httpOptions);
   }
+
+  addAdress(id: any, data: any): Observable<any> {
+    return this.http.put(baseUrl+ id, data, httpOptions);
+  }
 }

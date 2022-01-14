@@ -12,11 +12,6 @@
   padding: 2%;
 }
 
-
-.card-size {
-  max-width: 500px;
-}
-
 .max-card {
   display: flex;
   flex-wrap: wrap;
@@ -24,10 +19,15 @@
   padding: 2%;
 }
 
-.mat-card-image {
-  height: 400px;
-}
-
 .validity {
   margin-left: 25px;
+}
+
+.alignement {
+  display: flex;
+  justify-content: center;
+}
+
+.max-card {
+  width: 1500px;
 }

@@ -2,52 +2,53 @@
 <div style="display: flex; justify-content: center;" *ngIf="!isLoggedIn">
   Connectez-vous pour pouvoir acheter des cookies
 </div>
-<section class="alignment">
+<section class="alignment" style="display: flex; justify-content: center;">
   <div class="max-card">
     <article class="card-size" *ngFor="let e of listeCookie">
         <div class="card-shape">
-        <mat-card class="example-card">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>{{e.nom}}</mat-card-title>
-            </mat-card-header>
-            <img mat-card-image [src]="sanitize('data:image/jpg;base64, ' + e.photo)" alt="">
-            <mat-card-content>
-              <p>
-                {{e.prix}} euros
-              </p>
-              <div *ngIf="e.afficherRecette">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" [src]="sanitize('data:image/jpg;base64, ' + e.photo)" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{e.nom}}</h5>
+              <div class="card-text">
                 <p>
-                    Recette : {{e.recette}}
+                  {{e.prix}} euros
                 </p>
-                <button class="btn btn-light" (click)="afficherRecette(e, false)">Masquer recette</button>
-              </div>
-              <p *ngIf="!(e.afficherRecette)">
-                <button class="btn btn-light" (click)="afficherRecette(e, true)">Afficher recette</button>
-            </p>
-            </mat-card-content>
-            <form 
-              *ngIf="isLoggedIn && !isAdmin" 
-              name="form"
-              #f="ngForm"
-            >
-            <div class="form-group">
-              <label for="quantity">Qté.</label>
-              <input
-                type="number"
-                class="form-control"
-                name="quantity"
-                [(ngModel)]="e.quantity"
-                required
-              />
-              </div>
-              <span class="validity">{{ validity }} </span>
-            <mat-card-actions>
+                <div *ngIf="e.afficherRecette">
+                  <p>
+                    Recette : {{e.recette}}
+                  </p>
+                  <button class="btn btn-light" (click)="afficherRecette(e, false)">Masquer recette</button>
+                </div>
+                <p *ngIf="!(e.afficherRecette)">
+                  <button class="btn btn-light" (click)="afficherRecette(e, true)">Afficher recette</button>
+                </p>
+                <form 
+                  *ngIf="isLoggedIn && !isAdmin" 
+                  name="form"
+                  #f="ngForm"
+                  >
+                  <div class="form-group">
+                    <label for="quantity">Qté.</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="quantity"
+                      [(ngModel)]="e.quantity"
+                      required
+                      />
+                  </div>
+                  <span class="validity">{{ validity }} </span>
+                </form>
+          
               <button class="btn btn-success" (click)="addToPanier(e)">Acheter</button>
-            </mat-card-actions>
-            </form>
-        </mat-card>
+            </div>
+          </div>
+          </div>
+        
         </div>
     </article>
   </div>
 </section>
+
+

@@ -146,3 +146,23 @@ exports.view = function (req, res) {
       });
   });
 };
+
+exports.update = function (req, res) {User.findById(req.params.user_id, function (err, user) {
+  if (err) {
+    res.send(err);
+  }
+      
+  user.username = req.body.username ? req.body.username : user.username;
+  user.password = req.body.password ? req.body.password : user.password;
+  user.address = req.body.address;
+  
+  user.save(function (err) {
+      if (err)
+          res.json(err);
+      res.json({
+          message: 'user Info updated',
+          data: user
+      });
+  });
+});
+};
