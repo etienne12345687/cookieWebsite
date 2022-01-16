@@ -10,7 +10,7 @@ Pour lancer le projet :
         Le server run sur localhost:8080
     
     -> dans le fichier cookies-cloudFront/ :
-        commande pour lancer l'app : ng server
+        commande pour lancer l'app : ng serve
         L'application run sur localhost:4200
 
 Le profil Administrateur est accessible avec les identifiants : 
@@ -29,3 +29,5 @@ En tant qu'utilisateur, n'oubliez pas de valider votre panier afin qu'il soit vi
 
 En tant qu'administrateur, lors de la modification d'un cookie, l'image restera la même si vous ne téléchargez pas une autre image lors de la 
 modification, pas besoin de télécharger la même si vous voulez la conserver.
+
+Votre addresse ne sera demandé qu'au moment de la validation du panier, non à l'inscription.
