@@ -41,7 +41,7 @@
                   <span class="validity">{{ validity }} </span>
                 </form>
           
-              <button class="btn btn-success" (click)="addToPanier(e)">Acheter</button>
+              <button class="btn btn-success" *ngIf="isLoggedIn && !isAdmin" (click)="addToPanier(e)">Acheter</button>
             </div>
           </div>
           </div>
