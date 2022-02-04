@@ -64,7 +64,6 @@ export class CookieComponent implements OnInit {
             recette: element.recette,
             photo: this.arrayBufferToBase64(data),
             quantity: 0,
-            afficherRecette: false,
           });
         })
       })
@@ -98,10 +97,6 @@ export class CookieComponent implements OnInit {
         }
       );
     }
-  }
-
-  afficherRecette(element: { afficherRecette: any; }, boolean: any){
-    element.afficherRecette = boolean;
   }
 
 }

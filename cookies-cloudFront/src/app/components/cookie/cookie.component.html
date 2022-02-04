@@ -12,17 +12,13 @@
               <h5 class="card-title">{{e.nom}}</h5>
               <div class="card-text">
                 <p>
-                  {{e.prix}} euros
+                  {{e.prix}}€
                 </p>
-                <div *ngIf="e.afficherRecette">
+                <div>
                   <p>
-                    Recette : {{e.recette}}
+                    {{e.recette}}
                   </p>
-                  <button class="btn btn-light" (click)="afficherRecette(e, false)">Masquer recette</button>
                 </div>
-                <p *ngIf="!(e.afficherRecette)">
-                  <button class="btn btn-light" (click)="afficherRecette(e, true)">Afficher recette</button>
-                </p>
                 <form 
                   *ngIf="isLoggedIn && !isAdmin" 
                   name="form"
@@ -50,5 +46,6 @@
     </article>
   </div>
 </section>
+<app-footer></app-footer>
 
 

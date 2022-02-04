@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfilComponent } from './components/profil/profil.component';
+import { FooterComponent } from './structure/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ProfilComponent } from './components/profil/profil.component';
     ConnexionComponent,
     MenuComponent,
     Erreur404Component,
-    RegisterComponent
+    RegisterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

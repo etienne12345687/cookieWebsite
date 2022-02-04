@@ -1,0 +1,60 @@
+.footer {
+    width: 100%;
+    background-color: rgba(2, 87, 0);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-block {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin-bottom: 30px;
+    padding-left: 25px;
+    padding-right: 25px;
+    color: white;
+    padding-top: 10px;
+    align-items: center;
+}
+
+h1 {
+    font-family: Calder-Dark;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    font-size: 15px;
+}
+
+.navLink {
+    color:white;
+    padding: 10px;
+    outline: none;
+    text-decoration: none;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.linklist {
+    list-style: none;
+    padding: 0;
+}
+
+.linklist-item {
+    position: relative;
+    display: block;
+    margin-bottom: 12px;
+    width: 100%;
+    line-height: 1.5;
+    text-align: left;
+    transition: all .2s ease-in-out;
+    font-size: 15px;
+  }
+
+.navLink {
+    color: white;
+    font-family: Calder-LC;
+    font-size: 14px;
+    font-weight: 400;
+}

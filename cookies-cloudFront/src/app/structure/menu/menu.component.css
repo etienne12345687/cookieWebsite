@@ -2,10 +2,11 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    background-color: rgb(2, 87, 0);
 }
 
 .navLink {
-    color:black;
+    color:white;
     padding: 10px;
     outline: none;
     text-decoration: none;
@@ -24,10 +25,8 @@
 
 .container-logo{
     position: relative;
-    max-width: 60%;
-    max-height: 300px;
 }
 
 .logo {
-    height: 300px;
+    height: 500px;
 }
