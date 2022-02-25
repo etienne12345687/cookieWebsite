@@ -56,7 +56,6 @@ export class CookieComponent implements OnInit {
     this.CookieServ.getAll().subscribe(data => {
       data.data.forEach((element: {_id:any, nom: any; prix: any; recette: any; photo: any; }) => {
         this.imageServ.get(element.photo).subscribe( data => {
-          console.log(data);
           this.listeCookie.push({
             _id: element._id,
             nom: element.nom,
@@ -80,22 +79,39 @@ export class CookieComponent implements OnInit {
       user: this.tokenStorageService.getUser().id,
       prix: element.prix * element.quantity
     }
+    let isAlreadyOrder = false;
     
     if (element.quantity === 0){
       this.validity = "Merci d'entrer un nombre.";
     } else {
-      this.validity = "";
-      this.panierServ.create(cookie).subscribe(
-        (res: any) => {
-          console.log(res);
-          this.isSuccessful = true;
-          this.isFailed = false;
-          Swal.fire('', 'Cookie ajouté au panier', 'success')
-        },
-        (error:any) => {
-          console.log(error);
-        }
-      );
+      this.panierServ.getAll().subscribe(data => {
+        data.data.forEach((element: { cookie: number; quantity: number; payed: boolean; _id: number; user: any;}, index: any) => {
+          if (element.cookie === cookie.cookie && !element.payed && element.user[0] === cookie.user) {
+            const newCookie = element;
+            newCookie.quantity += cookie.quantity;
+            this.panierServ.update(element._id, newCookie).subscribe(() => {
+              this.isSuccessful = true;
+              this.isFailed = false;
+              Swal.fire('', 'Cookie ajouté au panier', 'success')
+            }, (error:any) => {
+              console.log(error);
+            });
+            isAlreadyOrder = true;
+          } else if ( index === data.data.length - 1 && !isAlreadyOrder) {
+            this.validity = "";
+            this.panierServ.create(cookie).subscribe(
+            (res: any) => {
+              console.log(res);
+              this.isSuccessful = true;
+              this.isFailed = false;
+              Swal.fire('', 'Cookie ajouté au panier', 'success')
+            },
+            (error:any) => {
+              console.log(error);
+            });
+          }
+        })
+      });
     }
   }
 

@@ -16,6 +16,8 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { FooterComponent } from './structure/footer/footer.component';
+import { HistoireComponent } from './components/histoire/histoire.component';
+import { SavoirFaireComponent } from './components/savoir-faire/savoir-faire.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { FooterComponent } from './structure/footer/footer.component';
     MenuComponent,
     Erreur404Component,
     RegisterComponent,
-    FooterComponent
+    FooterComponent,
+    HistoireComponent,
+    SavoirFaireComponent
   ],
   imports: [
     BrowserModule,

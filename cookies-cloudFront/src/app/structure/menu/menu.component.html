@@ -8,6 +8,8 @@
       <a class="navLink" routerLink="/">Accueil</a>
       <a class="navLink" *ngIf="isLoggedIn" routerLink="/profil">Profil</a>
       <a class="navLink" *ngIf="isLoggedIn && !isAdmin" routerLink="/panier">Panier</a>
+      <a class="navLink" routerLink="/histoire">Notre Histoire</a>
+      <a class="navLink" routerLink="/savoir-faire">Notre Savoir-Faire</a>
       <a class="navLink" *ngIf="!isLoggedIn" routerLink="/connexion">Connexion</a>
       <a class="navLink" *ngIf="!isLoggedIn" routerLink="/register">S'inscrire</a>
       <a class="navLink" *ngIf="isAdmin" routerLink="/admin">Administrateur</a>

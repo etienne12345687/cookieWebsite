@@ -45,11 +45,11 @@
               role="alert"
               *ngIf="f.submitted && isLoginFailed"
             >
-              Login failed: {{ errorMessage }}
+              Connexion échoué: {{ errorMessage }}
             </div>
           </div>
     
         <div class="alert alert-success" *ngIf="isLoggedIn">
-          Logged in as {{ roles }}.
+          Connexion réussi comme : {{ roles }}.
         </div>
       </div>

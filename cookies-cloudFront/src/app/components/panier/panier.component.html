@@ -5,7 +5,6 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="col">#</th>
           <th scope="col">Cookie</th>
           <th scope="col">Quantité</th>
           <th scope="col">Prix unitaire</th>
@@ -14,8 +13,7 @@
         </tr>
       </thead>
       <tbody>
-       <tr *ngFor="let command of currentPanier; index as i">
-          <th scope="row">{{ i + 1 }}</th>
+       <tr *ngFor="let command of currentPanier">
           <td> {{ command.cookieName }} </td>
           <td>{{ command.quantity | number }}</td>
           <td> {{ command.prixUnitaire }} </td>
@@ -44,7 +42,6 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">#</th>
               <th scope="col">Cookie</th>
               <th scope="col">Quantité</th>
               <th scope="col">Prix unitaire</th>
@@ -52,8 +49,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let command of previousPanier; index as i">
-              <th scope="row">{{ i + 1 }}</th>
+            <tr *ngFor="let command of previousPanier">
               <td> {{ command.cookieName }} </td>
               <td>{{ command.quantity | number }}</td>
               <td> {{ command.prixUnitaire }} </td>
