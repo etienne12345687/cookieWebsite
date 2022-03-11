@@ -25,7 +25,7 @@ export class ProfilGuard implements CanActivate {
           icon: 'warning',
           confirmButtonText: 'OK',
         }).then((result) => {
-          window.location.replace('/');
+          location.replace('/');
         });
         return false;
       }

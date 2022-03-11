@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, HostListener } from '@angular/core';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { trigger, state, transition, style, animate } from '@angular/animations';  
+import { DOCUMENT } from '@angular/common';
 
 
 @Component({
@@ -8,9 +10,10 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+
   isLoggedIn = false;
   isAdmin = false;
-
+      
   constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
@@ -18,6 +21,21 @@ export class MenuComponent implements OnInit {
     if (this.tokenStorageService.getUser().roles == 'ROLE_ADMIN'){
       this.isAdmin = true;
     };
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e: any) {
+     if (window.pageYOffset > 300) {
+       let element = document.getElementById('navbar');
+       if (element != null) {
+        element.classList.add('sticky');
+       }
+     } else {
+      let element = document.getElementById('navbar');
+      if (element != null) {
+        element.classList.remove('sticky'); 
+      }
+     }
   }
 
   logout(): void {

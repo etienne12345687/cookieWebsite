@@ -5,7 +5,6 @@ import { CookieComponent } from './components/cookie/cookie.component';
 import { PanierComponent } from './components/panier/panier.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { RegisterComponent } from './components/register/register.component';
-import { HistoireComponent } from './components/histoire/histoire.component';
 import { SavoirFaireComponent } from './components/savoir-faire/savoir-faire.component';
 import { Erreur404Component } from './structure/erreur404/erreur404.component';
 import { AdminGuard } from './utils/security/admin.guard';
@@ -27,7 +26,6 @@ const routes: Routes = [
   },
   {path:'connexion',component:ConnexionComponent},
   {path:'register', component: RegisterComponent},
-  {path:'histoire',component:HistoireComponent},
   {path:'savoir-faire', component: SavoirFaireComponent},
   {
     path: 'admin',

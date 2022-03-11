@@ -5,44 +5,45 @@
 <section class="alignment" style="display: flex; justify-content: center;">
   <div class="max-card">
     <article class="card-size" *ngFor="let e of listeCookie">
-        <div class="card-shape">
-          <div class="card" style="width: 18rem;">
-            <img class="card-img-top" [src]="sanitize('data:image/jpg;base64, ' + e.photo)" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">{{e.nom}}</h5>
-              <div class="card-text">
+      <div class="card-shape">
+        <div class="card" style="max-width: 23rem; width: 100%;">
+          <img class="card-img-top" [src]="sanitize('data:image/jpg;base64, ' + e.photo)" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{e.nom}}</h5>
+            <div class="card-text">
+              <p>
+                {{e.prix}}€
+              </p>
+              <div>
                 <p>
-                  {{e.prix}}€
+                  {{e.recette}}
                 </p>
-                <div>
-                  <p>
-                    {{e.recette}}
-                  </p>
+              </div>
+              <form 
+                *ngIf="isLoggedIn && !isAdmin" 
+                name="form"
+                #f="ngForm"
+                >
+                <div class="form-group" style="display: flex; flex-direction: row; justify-content: space-between;">
+                  <input
+                    type="number"
+                    class="form-control"
+                    name="quantity"
+                    [(ngModel)]="e.quantity"
+                    style="max-width: 25%;"
+                    required
+                    />
+                    <span class="validity">{{ validity }} </span>
+                    <button class="btn btn-buy" *ngIf="isLoggedIn && !isAdmin" (click)="addToPanier(e)">Acheter</button>
                 </div>
-                <form 
-                  *ngIf="isLoggedIn && !isAdmin" 
-                  name="form"
-                  #f="ngForm"
-                  >
-                  <div class="form-group">
-                    <label for="quantity">Qté.</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      name="quantity"
-                      [(ngModel)]="e.quantity"
-                      required
-                      />
-                  </div>
-                  <span class="validity">{{ validity }} </span>
-                </form>
-          
-              <button class="btn btn-buy" *ngIf="isLoggedIn && !isAdmin" (click)="addToPanier(e)">Acheter</button>
-            </div>
+              </form>
+              <div *ngIf="!isLoggedIn">
+                <button class="btn btn-buy" (click)="tryOrderWithoutLogged()">Commander</button>
+              </div>
           </div>
-          </div>
-        
         </div>
+        </div>
+      </div>
     </article>
   </div>
 </section>

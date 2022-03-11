@@ -16,7 +16,6 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { FooterComponent } from './structure/footer/footer.component';
-import { HistoireComponent } from './components/histoire/histoire.component';
 import { SavoirFaireComponent } from './components/savoir-faire/savoir-faire.component';
 
 @NgModule({
@@ -30,7 +29,6 @@ import { SavoirFaireComponent } from './components/savoir-faire/savoir-faire.com
     Erreur404Component,
     RegisterComponent,
     FooterComponent,
-    HistoireComponent,
     SavoirFaireComponent
   ],
   imports: [

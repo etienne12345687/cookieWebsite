@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    max-width: 100%;
+}
+
+.text {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    float: none;
+}
+
+.title {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.dev {
+    padding: 30px;
+    text-indent: 10%;
+    font: italic 1.2em "Fira Sans", serif;
+}
+
+img {
+    width: 300px;
+    height: 500px;
+    float: none;
+}

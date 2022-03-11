@@ -1,27 +1,26 @@
 <app-menu></app-menu>
 <section>
-    <div style="width: 400px; margin: auto;">
-        <form
-        *ngIf="!isLoggedIn"
-        name="form"
-        (ngSubmit)="f.form.valid && onSubmit()"
-        #f="ngForm"
-        novalidate
-      > 
-        <div class="form-group">
-          <label for="username">Username</label>
-            <input
-            type="text"
-            class="form-control"
-            name="username"
-            [(ngModel)]="form.username"
-            required
-            #username="ngModel"
-          />
-
+  <div style="margin: auto; max-width: 100%; max-width: 400px;">
+    <form
+      *ngIf="!isLoggedIn"
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    > 
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          [(ngModel)]="form.username"
+          required
+          #username="ngModel"
+        />
         <div class="form-group">
           <label for="username">Password</label>
-            <input
+          <input
             type="password"
             class="form-control"
             name="password"
@@ -31,25 +30,31 @@
             #password="ngModel"
           />
         </div>
-          <div class="validation">
-            <button class="btn btn-success" (click)="onSubmit()">
-              Valider
-            </button>
+
+        <div class="validation">
+          <button class="btn btn-success" (click)="onSubmit()">
+            Valider
+          </button>
+        </div>
+        
+        <div class="inscrit">
+          Tu n'as pas encore de compte ? <a class="navLink" routerLink="/register">Inscris-toi</a>
+        </div>
+        
+        <div class="form-group">
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && isLoginFailed"
+          >
+            Connexion échoué: {{ errorMessage }}
           </div>
-          <div class="inscrit">
-            Tu n'as pas encore de compte ? <a class="navLink" routerLink="/register">Inscris-toi</a>
-          </div>
-          <div class="form-group">
-            <div
-              class="alert alert-danger"
-              role="alert"
-              *ngIf="f.submitted && isLoginFailed"
-            >
-              Connexion échoué: {{ errorMessage }}
-            </div>
-          </div>
+        </div>
     
         <div class="alert alert-success" *ngIf="isLoggedIn">
           Connexion réussi comme : {{ roles }}.
         </div>
       </div>
+    </form>
+  </div>
+</section>

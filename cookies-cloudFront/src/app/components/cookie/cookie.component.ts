@@ -115,5 +115,23 @@ export class CookieComponent implements OnInit {
     }
   }
 
+
+  tryOrderWithoutLogged() {
+    Swal.fire({
+      title: 'Vous devez vous connecter pour commander',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Se connecter',
+      denyButtonText: `S'inscrire`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        window.location.replace('/connexion');
+      } else if (result.isDenied) {
+        window.location.replace('/register');
+      }
+    })
+  }
+
 }
 
